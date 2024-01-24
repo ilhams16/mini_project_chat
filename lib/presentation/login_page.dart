@@ -1,0 +1,158 @@
+import 'package:flutter/material.dart';
+
+class LoginPage extends StatefulWidget {
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  int currentPageIndex = 0;
+
+  TextEditingController _usernameController = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Chatting Apps Demo"),
+        centerTitle: true,
+        backgroundColor: Colors.lightBlueAccent,
+      ),
+      bottomNavigationBar: NavigationBar(
+          onDestinationSelected: (int index) {
+            setState(() {
+              currentPageIndex = index;
+            });
+          },
+          indicatorColor: Colors.lightBlueAccent,
+          selectedIndex: currentPageIndex,
+          destinations: const <Widget>[
+            NavigationDestination(
+                selectedIcon: Icon(Icons.login),
+                icon: Icon(Icons.login_outlined),
+                label: "Login"),
+            NavigationDestination(
+                selectedIcon: Icon(Icons.people),
+                icon: Icon(Icons.people_outline),
+                label: "Register")
+          ]),
+      body: <Widget>[
+        /// Login page
+        Card(
+          child: Center(
+            child: Container(
+              height: 500,
+              width: 500,
+              padding: EdgeInsets.all(20),
+              decoration:
+                  BoxDecoration(border: Border.all(style: BorderStyle.solid)),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "LOGIN",
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(
+                    height: 100,
+                  ),
+                  TextFormField(
+                    controller: _usernameController,
+                    decoration: InputDecoration(
+                        label: Text("Username"), hintText: "Masukkan Username"),
+                  ),
+                  SizedBox(
+                    height: 50,
+                  ),
+                  OutlinedButton(
+                      onPressed: () {},
+                      child: Container(
+                        padding: EdgeInsets.all(5),
+                        width: 70,
+                        child: Center(
+                          child: Text("Login"),
+                        ),
+                      )),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text("Belum Punya Akun?"),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  OutlinedButton(
+                      onPressed: () {},
+                      child: Container(
+                        padding: EdgeInsets.all(5),
+                        width: 70,
+                        child: Center(
+                          child: Text("Register"),
+                        ),
+                      )),
+                ],
+              ),
+            ),
+          ),
+        ),
+
+        /// Registration page
+        Card(
+          child: Center(
+            child: Container(
+              height: 500,
+              width: 500,
+              padding: EdgeInsets.all(20),
+              decoration:
+                  BoxDecoration(border: Border.all(style: BorderStyle.solid)),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "REGISTER",
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(
+                    height: 100,
+                  ),
+                  TextFormField(
+                    controller: _usernameController,
+                    decoration: InputDecoration(
+                        label: Text("Username"), hintText: "Masukkan Username"),
+                  ),
+                  SizedBox(
+                    height: 50,
+                  ),
+                  OutlinedButton(
+                      onPressed: () {},
+                      child: Container(
+                        padding: EdgeInsets.all(5),
+                        width: 70,
+                        child: Center(
+                          child: Text("Register"),
+                        ),
+                      )),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text("Sudah Punya Akun?"),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  OutlinedButton(
+                      onPressed: () {},
+                      child: Container(
+                        padding: EdgeInsets.all(5),
+                        width: 70,
+                        child: Center(
+                          child: Text("Login"),
+                        ),
+                      )),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ][currentPageIndex],
+    );
+  }
+}
