@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mini_project_chat/data/datasource/remote_user_datasource.dart';
 import 'package:mini_project_chat/data/repository/message_repository.dart';
-import 'package:mini_project_chat/data/repository/user_repository.dart';
+import 'package:mini_project_chat/presentation/login_page.dart';
 
 class ChatPage extends StatefulWidget {
   late String room;
@@ -25,10 +24,10 @@ class _ChatPageState extends State<ChatPage> {
       // body: FutureBuilder(
       //     future: MessageRepository().getMessage("8SFkk"),
       //     builder: (context, snapshot) {
-      //       return Text('${snapshot.data![1]['username']}');
-      //     })
+      //       return Text("${snapshot.error}");
+      //     }),
       body: FutureBuilder(
-        future: MessageRepository().getMessage('8SFkk'),
+        future: MessageRepository().getMessage(room),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             var listMessage = snapshot.data!;
@@ -42,9 +41,9 @@ class _ChatPageState extends State<ChatPage> {
                   child: Card(
                     child: Column(
                       children: [
-                        Text('${listMessage[i]['username']}'),
-                        Text('${listMessage[i]['text']}'),
-                        Text('${listMessage[i]['timestamp']}'),
+                        Text('${listMessage[i]["username"]}'),
+                        Text('${listMessage[i]["text"]}'),
+                        Text('${listMessage[i]["timestamp"]}'),
                       ],
                     ),
                   ),

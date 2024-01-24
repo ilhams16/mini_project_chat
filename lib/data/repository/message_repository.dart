@@ -12,8 +12,13 @@ class MessageRepository {
         (jsonDecode(await source)['data']['messages'] as List<dynamic>)
             .cast<Map<String, dynamic>>()
             .toList();
-
-    // var messages = List<Map<String, dynamic>>.from(jsonArray);
+    // var listMessages = <Message>[];
+    // for (var i; i < jsonArray.length; i++) {
+    //   listMessages.add(Message(
+    //       username: jsonArray[i]["username"],
+    //       text: jsonArray[i]["text"],
+    //       timestamp: int.parse(jsonArray[i]["timestamp"])));
+    // }
     return jsonArray;
   }
 }

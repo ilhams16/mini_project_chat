@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mini_project_chat/presentation/home_page.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -65,7 +66,13 @@ class _LoginPageState extends State<LoginPage> {
                     height: 50,
                   ),
                   OutlinedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => HomePage(
+                                    username: _usernameController.text)));
+                      },
                       child: Container(
                         padding: EdgeInsets.all(5),
                         width: 70,

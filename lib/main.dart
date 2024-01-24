@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mini_project_chat/presentation/chat_page.dart';
-import 'package:mini_project_chat/presentation/home_page.dart';
 import 'package:mini_project_chat/presentation/login_page.dart';
 
 void main() {
@@ -17,7 +16,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.grey),
         useMaterial3: true,
       ),
-      home: ChatPage("8SFkk"),
+      home: LoginPage(),
     );
   }
 }
