@@ -18,45 +18,46 @@ class _ChatPageState extends State<ChatPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text("Chatting Apps Demo"),
-          centerTitle: true,
-        ),
-        body: FutureBuilder(
-            future: MessageRepository().getMessage("8SFkk"),
-            builder: (context, snapshot) {
-              var message = snapshot.data;
-              return Text('${message}');
-            })
-        // body: FutureBuilder(
-        //   future: MessageRepository().getMessage('8SFkk'),
-        //   builder: (context, snapshot) {
-        //     if (snapshot.hasData) {
-        //       var listMessage = snapshot.data!;
-        //       return ListView(
-        //         children: List.generate(listMessage.length, (i) {
-        //           return GestureDetector(
-        //             onTap: () {
-        //               // Navigator.of(context).push(MaterialPageRoute(
-        //               //     builder: (context) => ChatPage(listMessage[i])));
-        //             },
-        //             child: Card(
-        //               child: Column(
-        //                 children: [
-        //                   Text('${listMessage[i]}'),
-        //                 ],
-        //               ),
-        //             ),
-        //           );
-        //         }),
-        //       );
-        //     } else if (snapshot.hasError) {
-        //       return Text("${snapshot.error}");
-        //     } else {
-        //       return Text("Gagal");
-        //     }
-        // },
-        // ),
-        );
+      appBar: AppBar(
+        title: Text("Chatting Apps Demo"),
+        centerTitle: true,
+      ),
+      // body: FutureBuilder(
+      //     future: MessageRepository().getMessage("8SFkk"),
+      //     builder: (context, snapshot) {
+      //       return Text('${snapshot.data![1]['username']}');
+      //     })
+      body: FutureBuilder(
+        future: MessageRepository().getMessage('8SFkk'),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            var listMessage = snapshot.data!;
+            return ListView(
+              children: List.generate(listMessage.length, (i) {
+                return GestureDetector(
+                  onTap: () {
+                    // Navigator.of(context).push(MaterialPageRoute(
+                    //     builder: (context) => ChatPage(listMessage[i])));
+                  },
+                  child: Card(
+                    child: Column(
+                      children: [
+                        Text('${listMessage[i]['username']}'),
+                        Text('${listMessage[i]['text']}'),
+                        Text('${listMessage[i]['timestamp']}'),
+                      ],
+                    ),
+                  ),
+                );
+              }),
+            );
+          } else if (snapshot.hasError) {
+            return Text("${snapshot.error}");
+          } else {
+            return Text("Gagal");
+          }
+        },
+      ),
+    );
   }
 }
