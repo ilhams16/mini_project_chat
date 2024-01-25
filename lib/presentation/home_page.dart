@@ -64,9 +64,53 @@ class _HomePageState extends State<HomePage> {
                               }
                               return Column(
                                 children: [
-                                  Text("${listMessage[index]['username']}"),
-                                  Text("${listMessage[index]['text']}"),
-                                  Text("${listMessage[index]['timestamp']}"),
+                                  Container(
+                                    padding: EdgeInsets.all(10),
+                                    child: Row(
+                                      children: [
+                                        Container(
+                                          padding: EdgeInsets.all(10),
+                                          margin: EdgeInsets.all(5),
+                                          decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              border: Border.all(
+                                                  style: BorderStyle.solid)),
+                                          width: 50,
+                                          child: Icon(Icons.person),
+                                        ),
+                                        Expanded(
+                                            flex: 2,
+                                            child: Container(
+                                              padding: EdgeInsets.all(10),
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    "${listMessage[index]['username']}",
+                                                    style: TextStyle(
+                                                        fontSize: 18,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                  Text(
+                                                    "${listMessage[index]['text']}",
+                                                    maxLines: 2,
+                                                  ),
+                                                ],
+                                              ),
+                                            )),
+                                        Container(
+                                          padding: EdgeInsets.all(5),
+                                          child: Text(
+                                              "${listMessage[index]['timestamp']}"),
+                                        )
+                                      ],
+                                    ),
+                                  )
+                                  // Text("${listMessage[index]['username']}"),
+                                  // Text("${listMessage[index]['text']}"),
+                                  // Text("${listMessage[index]['timestamp']}"),
                                 ],
                               );
                               // Text("${listMessage[index]['username']}");

@@ -42,19 +42,15 @@ class _ChatPageState extends State<ChatPage> {
                   var listMessage = snapshot.data!;
                   return ListView(
                     children: List.generate(listMessage.length, (i) {
-                      return GestureDetector(
-                        onTap: () {
-                          // Navigator.of(context).push(MaterialPageRoute(
-                          //     builder: (context) => ChatPage(listMessage[i])));
-                        },
-                        child: Card(
-                          child: Column(
-                            children: [
-                              Text('${listMessage[i]["username"]}'),
-                              Text('${listMessage[i]["text"]}'),
-                              Text('${listMessage[i]["timestamp"]}'),
-                            ],
-                          ),
+                      return Card(
+                        child: Column(
+                          children: [
+                            Container(
+                              child: Text('${listMessage[i]["username"]}'),
+                            ),
+                            Text('${listMessage[i]["text"]}'),
+                            Text('${listMessage[i]["timestamp"]}'),
+                          ],
                         ),
                       );
                     }),

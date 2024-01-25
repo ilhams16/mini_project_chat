@@ -45,8 +45,10 @@ class _LoginPageState extends State<LoginPage> {
               height: 500,
               width: 500,
               padding: EdgeInsets.all(20),
-              decoration:
-                  BoxDecoration(border: Border.all(style: BorderStyle.solid)),
+              decoration: BoxDecoration(
+                  color: Colors.transparent,
+                  border: Border.all(style: BorderStyle.solid),
+                  borderRadius: BorderRadius.all(Radius.circular(20))),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -60,10 +62,12 @@ class _LoginPageState extends State<LoginPage> {
                   TextFormField(
                     controller: _usernameController,
                     decoration: InputDecoration(
-                        label: Text("Username"), hintText: "Masukkan Username"),
+                        border: OutlineInputBorder(),
+                        label: Text("Username"),
+                        hintText: "Masukkan Username"),
                   ),
                   SizedBox(
-                    height: 50,
+                    height: 100,
                   ),
                   OutlinedButton(
                       onPressed: () {
@@ -80,22 +84,6 @@ class _LoginPageState extends State<LoginPage> {
                           child: Text("Login"),
                         ),
                       )),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text("Belum Punya Akun?"),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  OutlinedButton(
-                      onPressed: () {},
-                      child: Container(
-                        padding: EdgeInsets.all(5),
-                        width: 70,
-                        child: Center(
-                          child: Text("Register"),
-                        ),
-                      )),
                 ],
               ),
             ),
@@ -109,8 +97,9 @@ class _LoginPageState extends State<LoginPage> {
               height: 500,
               width: 500,
               padding: EdgeInsets.all(20),
-              decoration:
-                  BoxDecoration(border: Border.all(style: BorderStyle.solid)),
+              decoration: BoxDecoration(
+                  border: Border.all(style: BorderStyle.solid),
+                  borderRadius: BorderRadius.all(Radius.circular(20))),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -124,10 +113,12 @@ class _LoginPageState extends State<LoginPage> {
                   TextFormField(
                     controller: _usernameController,
                     decoration: InputDecoration(
-                        label: Text("Username"), hintText: "Masukkan Username"),
+                        border: OutlineInputBorder(),
+                        label: Text("Username"),
+                        hintText: "Masukkan Username"),
                   ),
                   SizedBox(
-                    height: 50,
+                    height: 100,
                   ),
                   OutlinedButton(
                       onPressed: () {},
@@ -136,22 +127,6 @@ class _LoginPageState extends State<LoginPage> {
                         width: 70,
                         child: Center(
                           child: Text("Register"),
-                        ),
-                      )),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text("Sudah Punya Akun?"),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  OutlinedButton(
-                      onPressed: () {},
-                      child: Container(
-                        padding: EdgeInsets.all(5),
-                        width: 70,
-                        child: Center(
-                          child: Text("Login"),
                         ),
                       )),
                 ],
