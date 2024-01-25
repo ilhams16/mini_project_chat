@@ -42,14 +42,35 @@ class _ChatPageState extends State<ChatPage> {
                   var listMessage = snapshot.data!;
                   return ListView(
                     children: List.generate(listMessage.length, (i) {
-                      return Card(
+                      return Container(
+                        padding:
+                            EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                        margin: (listMessage[i]['username'] == username
+                            ? EdgeInsets.fromLTRB(100, 10, 10, 10)
+                            : EdgeInsets.fromLTRB(10, 10, 100, 10)),
                         child: Column(
+                          crossAxisAlignment:
+                              (listMessage[i]['username'] == username
+                                  ? CrossAxisAlignment.end
+                                  : CrossAxisAlignment.start),
                           children: [
                             Container(
-                              child: Text('${listMessage[i]["username"]}'),
+                              padding: EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                  color: (listMessage[i]["username"] == username
+                                      ? Colors.lightBlueAccent
+                                      : Color.fromARGB(255, 140, 219, 255)),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10))),
+                              child: Text(
+                                '${listMessage[i]["text"]}',
+                                style: TextStyle(fontSize: 16),
+                              ),
                             ),
-                            Text('${listMessage[i]["text"]}'),
-                            Text('${listMessage[i]["timestamp"]}'),
+                            Text(
+                              '${listMessage[i]["timestamp"]}',
+                              style: TextStyle(fontSize: 10),
+                            ),
                           ],
                         ),
                       );
