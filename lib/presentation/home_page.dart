@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mini_project_chat/data/repository/message_repository.dart';
 import 'package:mini_project_chat/data/repository/user_repository.dart';
 import 'package:mini_project_chat/presentation/chat_page.dart';
 import 'package:mini_project_chat/presentation/login_page.dart';
@@ -21,6 +22,7 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Text("Chatting Apps Demo"),
         centerTitle: true,
+        backgroundColor: Colors.lightBlue,
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.logout),
@@ -42,11 +44,34 @@ class _HomePageState extends State<HomePage> {
                 return GestureDetector(
                   onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => ChatPage(listRoom[i])));
+                        builder: (context) => ChatPage(
+                            id: listRoom[i].toString(), username: username)));
                   },
                   child: Card(
                     child: Column(
-                      children: [Text('${listRoom[i]}')],
+                      children: [
+                        // Text('${listRoom[i]}')
+                        FutureBuilder(
+                            future: MessageRepository()
+                                .getMessage(listRoom[i].toString()),
+                            builder: (context, snapshot) {
+                              var listMessage = snapshot.data!;
+                              var index = 0;
+                              for (var i = 0; i < listMessage.length; i++) {
+                                if (listMessage[i]['username'] != username) {
+                                  index = i;
+                                }
+                              }
+                              return Column(
+                                children: [
+                                  Text("${listMessage[index]['username']}"),
+                                  Text("${listMessage[index]['text']}"),
+                                  Text("${listMessage[index]['timestamp']}"),
+                                ],
+                              );
+                              // Text("${listMessage[index]['username']}");
+                            })
+                      ],
                     ),
                   ),
                 );
@@ -55,7 +80,7 @@ class _HomePageState extends State<HomePage> {
           } else if (snapshot.hasError) {
             return Text('${snapshot.error}');
           } else {
-            return Text('Belum ada data');
+            return Text('Belum ada chat');
           }
         },
       ),

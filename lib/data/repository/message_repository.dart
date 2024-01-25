@@ -12,13 +12,11 @@ class MessageRepository {
         (jsonDecode(await source)['data']['messages'] as List<dynamic>)
             .cast<Map<String, dynamic>>()
             .toList();
-    // var listMessages = <Message>[];
-    // for (var i; i < jsonArray.length; i++) {
-    //   listMessages.add(Message(
-    //       username: jsonArray[i]["username"],
-    //       text: jsonArray[i]["text"],
-    //       timestamp: int.parse(jsonArray[i]["timestamp"])));
-    // }
     return jsonArray;
+  }
+
+  Future<bool> sendMessage(Message message) async {
+    var response = await remoteMessageDatasource.sendMessage(message.toJson());
+    return jsonDecode(response)['data'];
   }
 }

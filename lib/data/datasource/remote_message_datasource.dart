@@ -1,6 +1,8 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'package:mini_project_chat/domain/entities/message.dart';
+
 class RemoteMessageDataSource {
   static const URL = 'http://127.0.0.1:8080';
 
@@ -15,9 +17,9 @@ class RemoteMessageDataSource {
           'Content-Type': 'application/json; charset=UTF-8',
         },
         body: jsonEncode(<String, dynamic>{
-          'username': message['username'],
-          'text': message['text'],
-          'timestamp': message['timestamp']
+          'id': message['id'],
+          'from': message['username'],
+          'text': message['text']
         }));
     return response.body;
   }
