@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:mini_project_chat/presentation/home_page.dart';
 
 class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
+
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
@@ -9,13 +11,13 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   int currentPageIndex = 0;
 
-  TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _usernameController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Chatting Apps Demo"),
+        title: const Text("Chatting Apps Demo"),
         centerTitle: true,
         backgroundColor: Colors.lightBlueAccent,
       ),
@@ -44,29 +46,29 @@ class _LoginPageState extends State<LoginPage> {
             child: Container(
               height: 500,
               width: 500,
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
                   color: Colors.transparent,
                   border: Border.all(style: BorderStyle.solid),
-                  borderRadius: BorderRadius.all(Radius.circular(20))),
+                  borderRadius: const BorderRadius.all(Radius.circular(20))),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
+                  const Text(
                     "LOGIN",
                     style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 100,
                   ),
                   TextFormField(
                     controller: _usernameController,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                         label: Text("Username"),
                         hintText: "Masukkan Username"),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 100,
                   ),
                   OutlinedButton(
@@ -78,9 +80,9 @@ class _LoginPageState extends State<LoginPage> {
                                     username: _usernameController.text)));
                       },
                       child: Container(
-                        padding: EdgeInsets.all(5),
+                        padding: const EdgeInsets.all(5),
                         width: 70,
-                        child: Center(
+                        child: const Center(
                           child: Text("Login"),
                         ),
                       )),
@@ -96,36 +98,36 @@ class _LoginPageState extends State<LoginPage> {
             child: Container(
               height: 500,
               width: 500,
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
                   border: Border.all(style: BorderStyle.solid),
-                  borderRadius: BorderRadius.all(Radius.circular(20))),
+                  borderRadius: const BorderRadius.all(Radius.circular(20))),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
+                  const Text(
                     "REGISTER",
                     style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 100,
                   ),
                   TextFormField(
                     controller: _usernameController,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                         label: Text("Username"),
                         hintText: "Masukkan Username"),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 100,
                   ),
                   OutlinedButton(
                       onPressed: () {},
                       child: Container(
-                        padding: EdgeInsets.all(5),
+                        padding: const EdgeInsets.all(5),
                         width: 70,
-                        child: Center(
+                        child: const Center(
                           child: Text("Register"),
                         ),
                       )),

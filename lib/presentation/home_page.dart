@@ -7,31 +7,37 @@ import 'package:mini_project_chat/presentation/login_page.dart';
 
 class HomePage extends StatefulWidget {
   final String username;
-  const HomePage({required this.username});
+  const HomePage({super.key, required this.username});
 
   @override
-  State<HomePage> createState() => _HomePageState(username: this.username);
+  // ignore: no_logic_in_create_state
+  State<HomePage> createState() => _HomePageState(username: username);
 }
 
 class _HomePageState extends State<HomePage> {
   final String username;
   _HomePageState({required this.username});
-  TextEditingController _toController = TextEditingController();
+  final TextEditingController _toController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Chatting Apps Demo"),
+          title: const Text("Chatting Apps Demo"),
           centerTitle: true,
           backgroundColor: Colors.lightBlue,
           actions: <Widget>[
             IconButton(
-              icon: Icon(Icons.logout),
+              icon: const Icon(Icons.logout),
               tooltip: "Log Out",
               onPressed: () {
                 Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (context) => LoginPage()));
+                    MaterialPageRoute(builder: (context) => const LoginPage()));
               },
             )
           ],
@@ -49,68 +55,120 @@ class _HomePageState extends State<HomePage> {
                           builder: (context) => ChatPage(
                               id: listRoom[i].toString(), username: username)));
                     },
+                    // child: Text("${listRoom[i]}")
                     child: Card(
                       child: Column(
                         children: [
                           FutureBuilder(
                               future: MessageRepository()
-                                  .getMessage(listRoom[i].toString()),
+                                  .getUsers(listRoom[i].toString()),
                               builder: (context, snapshot) {
-                                var listMessage = snapshot.data!;
-                                var index = 0;
-                                for (var i = 0; i < listMessage.length; i++) {
-                                  if (listMessage[i]['username'] != username) {
-                                    index = i;
-                                  }
-                                }
+                                var listUsers = snapshot.data!;
                                 return Column(
                                   children: [
                                     Container(
-                                      padding: EdgeInsets.all(10),
+                                      padding: const EdgeInsets.all(10),
                                       child: Row(
                                         children: [
                                           Container(
-                                            padding: EdgeInsets.all(10),
-                                            margin: EdgeInsets.all(5),
+                                            padding: const EdgeInsets.all(10),
+                                            margin: const EdgeInsets.all(5),
                                             decoration: BoxDecoration(
                                                 shape: BoxShape.circle,
                                                 border: Border.all(
                                                     style: BorderStyle.solid)),
                                             width: 50,
-                                            child: Icon(Icons.person),
+                                            child: const Icon(Icons.person),
                                           ),
                                           Expanded(
                                               flex: 2,
                                               child: Container(
-                                                padding: EdgeInsets.all(10),
+                                                padding: const EdgeInsets.all(10),
                                                 child: Column(
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
                                                   children: [
                                                     Text(
-                                                      "${listMessage[index]['username']}",
-                                                      style: TextStyle(
+                                                      "${listUsers[0] != username ? listUsers[0] : listUsers[1]}",
+                                                      style: const TextStyle(
                                                           fontSize: 18,
                                                           fontWeight:
                                                               FontWeight.bold),
                                                     ),
-                                                    Text(
-                                                      "${listMessage[index]['text']!}",
-                                                      maxLines: 2,
-                                                    ),
+                                                    FutureBuilder(
+                                                        future: MessageRepository()
+                                                            .getMessage(
+                                                                listRoom[i]
+                                                                    .toString()),
+                                                        builder: (context,
+                                                            snapshot) {
+                                                          var index = 0;
+                                                          var listMessage =
+                                                              snapshot.data!;
+                                                          if (listMessage
+                                                              .isEmpty) {
+                                                            return const Text(
+                                                                "Belum ada pesan");
+                                                          } else {
+                                                            for (var i = 0;
+                                                                i <
+                                                                    listMessage
+                                                                        .length;
+                                                                i++) {
+                                                              if (listMessage[i]
+                                                                      [
+                                                                      'username'] !=
+                                                                  username) {
+                                                                index = i;
+                                                              }
+                                                            }
+                                                            return Column(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                Container(
+                                                                  child: Row(
+                                                                    children: [
+                                                                      Expanded(
+                                                                          flex:
+                                                                              2,
+                                                                          child:
+                                                                              Container(
+                                                                            child:
+                                                                                Text(
+                                                                              "${listMessage[index]['text']!}",
+                                                                              maxLines: 2,
+                                                                            ),
+                                                                          )),
+                                                                      Container(
+                                                                        padding:
+                                                                            const EdgeInsets.all(5),
+                                                                        child: Text(
+                                                                            "${listMessage[index]['timestamp']!}"),
+                                                                      )
+                                                                    ],
+                                                                  ),
+                                                                )
+                                                              ],
+                                                            );
+                                                          }
+                                                        })
                                                   ],
                                                 ),
-                                              )),
-                                          Container(
-                                            padding: EdgeInsets.all(5),
-                                            child: Text(
-                                                "${listMessage[index]['timestamp']!}"),
-                                          )
+                                              ))
                                         ],
                                       ),
                                     )
                                   ],
                                 );
+                                //     });
+                                //   } else {
+                                //
+                                //       }
+                                //     }
+                                //     return
+                                //   }
                               })
                         ],
                       ),
@@ -121,32 +179,35 @@ class _HomePageState extends State<HomePage> {
             } else if (snapshot.hasError) {
               return Text('${snapshot.error}');
             } else {
-              return Text('Belum ada chat');
+              return const Text('Belum ada chat');
             }
           },
         ),
         floatingActionButton: Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
                 color: Colors.lightBlueAccent,
                 borderRadius: BorderRadius.all(Radius.circular(10))),
             child: IconButton(
               iconSize: 36,
-              padding: EdgeInsets.all(10),
-              icon: Icon(Icons.message),
+              padding: const EdgeInsets.all(10),
+              icon: const Icon(Icons.message),
               onPressed: () {
-                showDialog<String>(
+                showDialog(
                   context: context,
                   builder: (BuildContext context) => AlertDialog(
                     title: const Text('Memulai Chat Baru'),
                     content: TextField(
                       controller: _toController,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                           label: Text("Username"),
                           hintText: "Masukkan username. . ."),
                     ),
-                    actions: <Widget>[
+                    actions: [
                       TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          _toController.clear();
+                          Navigator.pop(context);
+                        },
                         child: const Text('Cancel'),
                       ),
                       TextButton(
@@ -155,6 +216,8 @@ class _HomePageState extends State<HomePage> {
                             UserRepository().createRoom(
                                 Room(from: username, to: _toController.text));
                           });
+                          Navigator.pop(context);
+                          _toController.clear();
                         },
                         child: const Text('OK'),
                       ),

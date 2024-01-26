@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:mini_project_chat/data/repository/message_repository.dart';
 import 'package:mini_project_chat/domain/entities/message.dart';
-import 'package:mini_project_chat/presentation/login_page.dart';
 
 class ChatPage extends StatefulWidget {
   final String id;
   final String username;
-  ChatPage({required this.id, required this.username});
+  const ChatPage({super.key, required this.id, required this.username});
 
   @override
   State<ChatPage> createState() =>
-      _ChatPageState(id: this.id, username: this.username);
+      // ignore: no_logic_in_create_state
+      _ChatPageState(id: id, username: username);
 }
 
 class _ChatPageState extends State<ChatPage> {
-  TextEditingController _messageController = TextEditingController();
+  final TextEditingController _messageController = TextEditingController();
   final String id;
   final String username;
   _ChatPageState({required this.id, required this.username});
@@ -23,7 +23,7 @@ class _ChatPageState extends State<ChatPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Chatting Apps Demo"),
+          title: const Text("Chatting Apps Demo"),
           centerTitle: true,
           backgroundColor: Colors.lightBlue,
         ),
@@ -44,10 +44,10 @@ class _ChatPageState extends State<ChatPage> {
                     children: List.generate(listMessage.length, (i) {
                       return Container(
                         padding:
-                            EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                            const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
                         margin: (listMessage[i]['username'] == username
-                            ? EdgeInsets.fromLTRB(100, 10, 10, 10)
-                            : EdgeInsets.fromLTRB(10, 10, 100, 10)),
+                            ? const EdgeInsets.fromLTRB(100, 10, 10, 10)
+                            : const EdgeInsets.fromLTRB(10, 10, 100, 10)),
                         child: Column(
                           crossAxisAlignment:
                               (listMessage[i]['username'] == username
@@ -55,21 +55,21 @@ class _ChatPageState extends State<ChatPage> {
                                   : CrossAxisAlignment.start),
                           children: [
                             Container(
-                              padding: EdgeInsets.all(10),
+                              padding: const EdgeInsets.all(10),
                               decoration: BoxDecoration(
                                   color: (listMessage[i]["username"] == username
                                       ? Colors.lightBlueAccent
-                                      : Color.fromARGB(255, 140, 219, 255)),
+                                      : const Color.fromARGB(255, 140, 219, 255)),
                                   borderRadius:
-                                      BorderRadius.all(Radius.circular(10))),
+                                      const BorderRadius.all(Radius.circular(10))),
                               child: Text(
                                 '${listMessage[i]["text"]}',
-                                style: TextStyle(fontSize: 16),
+                                style: const TextStyle(fontSize: 16),
                               ),
                             ),
                             Text(
                               '${listMessage[i]["timestamp"]}',
-                              style: TextStyle(fontSize: 10),
+                              style: const TextStyle(fontSize: 10),
                             ),
                           ],
                         ),
@@ -79,12 +79,12 @@ class _ChatPageState extends State<ChatPage> {
                 } else if (snapshot.hasError) {
                   return Text("${snapshot.error}");
                 } else {
-                  return Text("Gagal");
+                  return const Text("Gagal");
                 }
               },
             )),
             Container(
-              padding: EdgeInsets.all(8),
+              padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
                 color: Colors.white,
                 boxShadow: [
@@ -92,7 +92,7 @@ class _ChatPageState extends State<ChatPage> {
                     color: Colors.grey.withOpacity(0.5),
                     spreadRadius: 1,
                     blurRadius: 5,
-                    offset: Offset(0, 3),
+                    offset: const Offset(0, 3),
                   ),
                 ],
               ),
@@ -101,13 +101,13 @@ class _ChatPageState extends State<ChatPage> {
                   Expanded(
                     child: TextField(
                       controller: _messageController,
-                      decoration: InputDecoration.collapsed(
+                      decoration: const InputDecoration.collapsed(
                         hintText: 'Masukkan Pesan...',
                       ),
                     ),
                   ),
                   IconButton(
-                    icon: Icon(Icons.send),
+                    icon: const Icon(Icons.send),
                     onPressed: () {
                       setState(() {
                         MessageRepository().sendMessage(Message(

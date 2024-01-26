@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mini_project_chat/presentation/chat_page.dart';
 import 'package:mini_project_chat/presentation/login_page.dart';
 
 void main() {

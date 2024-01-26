@@ -6,12 +6,19 @@ import 'package:mini_project_chat/domain/entities/message.dart';
 class MessageRepository {
   var remoteMessageDatasource = RemoteMessageDataSource();
 
-  Future<List> getMessage(String room) async {
+  Future<List?> getMessage(String room) async {
     var source = remoteMessageDatasource.getMessage(room);
     var jsonArray =
         (jsonDecode(await source)['data']['messages'] as List<dynamic>)
             .cast<Map<String, dynamic>>()
             .toList();
+    return jsonArray;
+  }
+
+  Future<List?> getUsers(String room) async {
+    var source = remoteMessageDatasource.getMessage(room);
+    var jsonArray =
+        (jsonDecode(await source)['data']['users'] as List<dynamic>).toList();
     return jsonArray;
   }
 
