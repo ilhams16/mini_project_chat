@@ -4,6 +4,7 @@ import 'package:mini_project_chat/data/repository/user_repository.dart';
 import 'package:mini_project_chat/domain/entities/room.dart';
 import 'package:mini_project_chat/presentation/chat_page.dart';
 import 'package:mini_project_chat/presentation/login_page.dart';
+import 'package:intl/intl.dart';
 
 class HomePage extends StatefulWidget {
   final String username;
@@ -83,7 +84,8 @@ class _HomePageState extends State<HomePage> {
                                           Expanded(
                                               flex: 2,
                                               child: Container(
-                                                padding: const EdgeInsets.all(10),
+                                                padding:
+                                                    const EdgeInsets.all(10),
                                                 child: Column(
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
@@ -102,26 +104,29 @@ class _HomePageState extends State<HomePage> {
                                                                     .toString()),
                                                         builder: (context,
                                                             snapshot) {
-                                                          var index = 0;
                                                           var listMessage =
                                                               snapshot.data!;
+                                                          var index =
+                                                              listMessage
+                                                                      .length -
+                                                                  1;
                                                           if (listMessage
                                                               .isEmpty) {
                                                             return const Text(
                                                                 "Belum ada pesan");
                                                           } else {
-                                                            for (var i = 0;
-                                                                i <
-                                                                    listMessage
-                                                                        .length;
-                                                                i++) {
-                                                              if (listMessage[i]
-                                                                      [
-                                                                      'username'] !=
-                                                                  username) {
-                                                                index = i;
-                                                              }
-                                                            }
+                                                            // for (var i = 0;
+                                                            //     i <
+                                                            //         listMessage
+                                                            //             .length;
+                                                            //     i++) {
+                                                            //   if (listMessage[i]
+                                                            //           [
+                                                            //           'username'] !=
+                                                            //       username) {
+                                                            //     index = i;
+                                                            //   }
+                                                            // }
                                                             return Column(
                                                               crossAxisAlignment:
                                                                   CrossAxisAlignment
@@ -142,8 +147,9 @@ class _HomePageState extends State<HomePage> {
                                                                             ),
                                                                           )),
                                                                       Container(
-                                                                        padding:
-                                                                            const EdgeInsets.all(5),
+                                                                        padding: const EdgeInsets
+                                                                            .all(
+                                                                            5),
                                                                         child: Text(
                                                                             "${listMessage[index]['timestamp']!}"),
                                                                       )
@@ -162,13 +168,6 @@ class _HomePageState extends State<HomePage> {
                                     )
                                   ],
                                 );
-                                //     });
-                                //   } else {
-                                //
-                                //       }
-                                //     }
-                                //     return
-                                //   }
                               })
                         ],
                       ),
@@ -212,12 +211,11 @@ class _HomePageState extends State<HomePage> {
                       ),
                       TextButton(
                         onPressed: () {
-                          setState(() {
-                            UserRepository().createRoom(
-                                Room(from: username, to: _toController.text));
-                          });
+                          UserRepository().createRoom(
+                              Room(from: username, to: _toController.text));
                           Navigator.pop(context);
                           _toController.clear();
+                          setState(() {});
                         },
                         child: const Text('OK'),
                       ),

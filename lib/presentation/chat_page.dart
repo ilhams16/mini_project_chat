@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:mini_project_chat/data/repository/message_repository.dart';
 import 'package:mini_project_chat/domain/entities/message.dart';
 
@@ -43,8 +44,8 @@ class _ChatPageState extends State<ChatPage> {
                   return ListView(
                     children: List.generate(listMessage.length, (i) {
                       return Container(
-                        padding:
-                            const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 10, horizontal: 15),
                         margin: (listMessage[i]['username'] == username
                             ? const EdgeInsets.fromLTRB(100, 10, 10, 10)
                             : const EdgeInsets.fromLTRB(10, 10, 100, 10)),
@@ -59,9 +60,10 @@ class _ChatPageState extends State<ChatPage> {
                               decoration: BoxDecoration(
                                   color: (listMessage[i]["username"] == username
                                       ? Colors.lightBlueAccent
-                                      : const Color.fromARGB(255, 140, 219, 255)),
-                                  borderRadius:
-                                      const BorderRadius.all(Radius.circular(10))),
+                                      : const Color.fromARGB(
+                                          255, 140, 219, 255)),
+                                  borderRadius: const BorderRadius.all(
+                                      Radius.circular(10))),
                               child: Text(
                                 '${listMessage[i]["text"]}',
                                 style: const TextStyle(fontSize: 16),
